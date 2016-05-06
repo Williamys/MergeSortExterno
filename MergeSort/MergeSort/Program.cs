@@ -18,6 +18,7 @@ namespace MergeSort
             UnindoPartes unindo = new UnindoPartes();
             Dividir dividir = new Dividir();
             Int32 tam1 = 100004000; // equivale a 1 gb 
+            Int32 tam3 = 300006000; // equivale a 3 gb 
             Int32 tam2 = 500009000; // equivale a 6 gb
             Stopwatch time = new Stopwatch();            
             //Int32 tamanho = 100000; // equivale a 1 mb            
@@ -25,7 +26,8 @@ namespace MergeSort
             do
             {
                 Console.WriteLine("[ 1 ] Criar arquivo de 1 GIGABYTE");
-                Console.WriteLine("[ 2 ] Criar arquivo de 6 GIGABYTES");
+                Console.WriteLine("[ 2 ] Criar arquivo de 3 GIGABYTES");
+                Console.WriteLine("[ 3 ] Criar arquivo de 6 GIGABYTES");
                 Console.WriteLine("[ 0 ] Sair do Programa");
                 Console.WriteLine("-------------------------------------");
                 Console.WriteLine("\n\n");
@@ -56,13 +58,13 @@ namespace MergeSort
                         break;
                     case 2:
                         Console.Clear();
-                        Console.Write("Informe a quantidades de memoria");
+                        Console.Write("Informe a quantidades de memoria:");
                         opcao = Int32.Parse(Console.ReadLine());
                         Console.Clear();
                         time.Start();
-                        criar.Criar(nomeArquivo, tam2);
-                        UsoMemoria();                        
-                        dividir.DividirArquivo(nomeArquivo, tam2/opcao);                        
+                        criar.Criar(nomeArquivo, tam3);
+                        UsoMemoria();
+                        dividir.DividirArquivo(nomeArquivo, (opcao * 10000));                        
                         UsoMemoria();                 
                         ordenar.OrdenandoPartes();            
                         UsoMemoria();                        
@@ -72,6 +74,25 @@ namespace MergeSort
                         TimeSpan tempo = time.Elapsed;
                         Console.WriteLine("\n\n");
                         Console.WriteLine("Merging completo:  " + tempo);                        
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("Informe a quantidades de memoria:");
+                        opcao = Int32.Parse(Console.ReadLine());
+                        Console.Clear();
+                        time.Start();
+                        criar.Criar(nomeArquivo, tam2);
+                        UsoMemoria();
+                        dividir.DividirArquivo(nomeArquivo, (opcao * 10000));
+                        UsoMemoria();
+                        ordenar.OrdenandoPartes();
+                        UsoMemoria();
+                        unindo.MergePartes();
+                        UsoMemoria();
+                        time.Stop();
+                        TimeSpan tempos = time.Elapsed;
+                        Console.WriteLine("\n\n");
+                        Console.WriteLine("Merging completo:  " + tempos);
                         break;
                     default:
                         Console.ReadKey();

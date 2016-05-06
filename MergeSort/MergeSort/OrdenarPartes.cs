@@ -21,8 +21,7 @@ namespace MergeSort
                 int[] numeros = matriz.Select(x => int.Parse(x)).ToArray(); // converto para inteiros a matriz de strings        
                 matriz = null;
                 GC.Collect(); //libero da memoria.
-                //Array.Sort(numeros); // metodo que ordena os numeros.
-                SortMerg
+                Array.Sort(numeros); // metodo que ordena os numeros.                
                 using (StreamWriter outputFile = new StreamWriter(caminho))
                 {
                     foreach (int line in numeros)
@@ -32,87 +31,6 @@ namespace MergeSort
                 numeros = null;                
                 GC.Collect(); //libero da memoria.
             }            
-        }
-
-        static public void MainMerge(int[] numbers, int left, int mid, int right)
-        {
-
-            int[] temp = new int[25];
-
-            int i, eol, num, pos;
-
-
-
-            eol = (mid - 1);
-
-            pos = left;
-
-            num = (right - left + 1);
-
-
-
-            while ((left <= eol) && (mid <= right))
-            {
-
-                if (numbers[left] <= numbers[mid])
-
-                    temp[pos++] = numbers[left++];
-
-                else
-
-                    temp[pos++] = numbers[mid++];
-
-            }
-
-
-
-            while (left <= eol)
-
-                temp[pos++] = numbers[left++];
-
-
-
-            while (mid <= right)
-
-                temp[pos++] = numbers[mid++];
-
-
-
-            for (i = 0; i < num; i++)
-            {
-
-                numbers[right] = temp[right];
-
-                right--;
-
-            }
-
-        }
-
-
-
-        static public void SortMerge(int[] numbers, int left, int right)
-        {
-
-            int mid;
-
-
-
-            if (right > left)
-            {
-
-                mid = (right + left) / 2;
-
-                SortMerge(numbers, left, mid);
-
-                SortMerge(numbers, (mid + 1), right);
-
-
-
-                MainMerge(numbers, left, (mid + 1), right);
-
-            }
-
         }
         /*public void OrdenandoPartes()
         {
